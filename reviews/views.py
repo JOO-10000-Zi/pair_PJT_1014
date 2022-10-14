@@ -4,7 +4,12 @@ from .models import reviews
 
 # Create your views here.
 def index(request):
-    return render(request, 'reviews/index.html')
+    name = reviews.objects.all()
+    context = {
+        'reviews' : name
+    }
+    
+    return render(request, 'reviews/index.html', context)
 
 def create(request):
     form = ReviewsForm(request.POST)
@@ -18,6 +23,12 @@ def create(request):
     }
     return render(request, 'reviews/create.html', context)
 
+def detail(request, pk):
+    review = reviews.objects.get(pk=pk)
+    context = {
+        'reviews': review,
+    }
+    return render(request, 'reviews/detail.html', context)
 # def create(request):
 
     # if request.user.is_authenticated:

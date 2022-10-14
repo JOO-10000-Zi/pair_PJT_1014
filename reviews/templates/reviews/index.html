@@ -1,4 +1,39 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 
-{% block content %}{% endblock content %}
+{% block content %}
+
+
+<h1>Movie Reviews</h1>
+<a class="btn btn-primary mx-3 px-3" href="{% url 'reviews:create' %}" role="button">리뷰 작성</a>
+<div class="table-responsive input-group mb-3 px-3">
+    <table class="table align-middle">
+        <thead>
+            <tr>
+                <th scope="col">리뷰 번호</th>
+                <th scope="col">리뷰 제목</th>
+                <th scope="col">작성 시간</th>
+                <th scope="col">리뷰 수정</th>
+                <th scope="col">삭제</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for review in reviews %}
+            <tr>
+                <th scope="row" class="align-items-center">{{ review.pk }}</th>
+                <td>
+                    <a href="{% url 'reviews:detail' review.pk %}" class="stretched-link">{{ review.title }}</a>
+                </td>
+                <td>{{ review.created_at }}</td>
+                {% comment %} <td>
+                    <a class="btn btn-primary py-sm-1" href="{% url 'review:update' review.pk %}" role="button">변경</a>
+                </td>
+                <td>
+                    <a class="btn btn-danger py-sm-1" href="{% url 'review:delete' review.pk %}" role="button">삭제</a>
+                </td> {% endcomment %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
