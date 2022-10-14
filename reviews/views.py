@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from .forms import ReviewsForm
 from .models import reviews
 
@@ -29,18 +30,19 @@ def detail(request, pk):
         'reviews': review,
     }
     return render(request, 'reviews/detail.html', context)
-# def create(request):
 
-    # if request.user.is_authenticated:
-    #     article_form = ReviewsForm(request.POST)
-    #     if article_form.is_valid():
-    #         article_form.save()
-    #         return redirect('articles:index')
-    #     else:
-    #         article_form = ReviewsForm()
-    #     context = {
-    #         'article_form':article_form
-    #     }
-    #     return render(request, 'articles/create.html', context)
-    # else:
-    #     return redirect('accounts:login')
+
+@login_required
+def update(request, pk):
+    Reviews = reviews.objects.get(pk=pk)
+    if request.method == "POST":
+        form = ReviewsForm(request.POST, instance=Reviews)
+        if form.is_valid():
+            form.save()
+            return redirect('reviews:detail', Reviews.pk)
+    else:
+        form = ReviewsForm(instance=Reviews)
+    context = {
+        'form': form
+    }
+    return render(request, 'reviews/update.html', context)
