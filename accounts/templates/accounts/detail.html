@@ -13,5 +13,5 @@
   {{ users.email }}<br>
   가입 날짜 :
   {{ users.date_joined }}<br>
-  <a class='btn btn-dark my-3' href="">수정하기</a>
+  <a class='btn btn-dark my-3' href="{% url 'accounts:update' %}">수정하기</a>
 {% endblock content %}
