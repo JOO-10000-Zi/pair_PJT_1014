@@ -5,7 +5,6 @@
 
 
 <h1>Movie Reviews</h1>
-<a class="btn btn-primary mx-3 px-3" href="{% url 'reviews:create' %}" role="button">리뷰 작성</a>
 <div class="table-responsive input-group mb-3 px-3">
     <table class="table align-middle">
         <thead>
@@ -13,8 +12,8 @@
                 <th scope="col">리뷰 번호</th>
                 <th scope="col">리뷰 제목</th>
                 <th scope="col">작성 시간</th>
-                <th scope="col">리뷰 수정</th>
-                <th scope="col">삭제</th>
+                {% comment %} <th scope="col">리뷰 수정</th>
+                <th scope="col">삭제</th> {% endcomment %}
             </tr>
         </thead>
         <tbody>
