@@ -39,3 +39,10 @@ def login(request):
         return render(request, "accounts/login.html", context)
     else:
         return redirect("accounts:index")
+
+def detail(request, pk):
+    users = User.objects.get(pk=pk)
+
+    context = {"users": users}
+
+    return render(request, "accounts/detail.html", context)
