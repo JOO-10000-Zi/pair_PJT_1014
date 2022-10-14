@@ -4,6 +4,6 @@
     <h1>{{ reviews.title }}</h1>
     <p>{{ reviews.content }}</p>
     <a class="btn btn-primary py-sm-1" href="{% url 'reviews:update' reviews.pk %}" role="button">변경</a>
-    <a class="btn btn-danger py-sm-1" href="" role="button">삭제</a>
+    <a class="btn btn-danger py-sm-1" href="{% url 'reviews:delete' reviews.pk %}" role="button">삭제</a>
   </div>
 {% endblock %}
